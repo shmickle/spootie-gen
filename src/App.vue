@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <TheHeader count="Add 1" />
-    <TheFooter />
-  </div>
+  <TheHeader />
+  <RouterView />
+  <TheFooter />
 </template>
 
 <script setup>
+import { RouterView } from "vue-router"
 import TheHeader from "./components/TheHeader.vue"
 import TheFooter from "./components/TheFooter.vue"
 </script>

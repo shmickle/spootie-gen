@@ -14,4 +14,9 @@ module.exports = {
   rules: {
     semi: [1, "never"],
   },
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+  },
 }
