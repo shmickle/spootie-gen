@@ -52,7 +52,8 @@ const optionSelected = reactive({
   textPrompt: null,
 })
 
-function generateImage() {
+function generateImage(event) {
+  event.target.reset()
   emit("generateImageEvent", optionSelected)
 }
 </script>

@@ -4,10 +4,13 @@
       <p class="instructions">
         Please enter a description of the image you want to generate.
       </p>
-      <GenerateImageForm @generate-image-event="getGenerateImageEvent" />
-      <p v-if="loading">Loading...</p>
+      <GenerateImageForm @generate-image-event="generateImageEvent" />
       <div class="result">
-        <img v-if="!loading" :src="image.url" />
+        <p class="loading" v-if="loading">Loading...</p>
+        <div v-else>
+          <p v-if="!image.placeholder">Text Prompt: "{{ textPrompt }}"</p>
+          <img :src="image.url" />
+        </div>
       </div>
     </div>
   </main>
@@ -26,22 +29,30 @@ const image = reactive({
 
 const loading = ref(false)
 
-function getGenerateImageEvent(options) {
+let textPrompt = ref(null)
+
+function generateImageEvent(options) {
   // const aiType = options.aiType
-  const textPrompt = options.textPrompt
+  textPrompt.value = options.textPrompt
 
   loading.value = !loading.value
+  image.placeholder = true
 
-  textToImage(textPrompt).then((result) => {
+  textToImage(textPrompt.value).then((result) => {
     image.url = result
+    image.placeholder = false
     loading.value = !loading.value
   })
 }
 </script>
 
 <style scoped>
-.instructions {
+p {
   color: white;
+}
+
+.instructions,
+.loading {
   text-align: center;
 }
 
