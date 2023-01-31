@@ -1,6 +1,5 @@
 import apiKey from "../apiKey"
-
-const deepai = require("deepai")
+import deepai from "deepai"
 
 deepai.setApiKey(apiKey)
 

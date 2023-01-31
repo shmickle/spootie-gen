@@ -1,14 +1,61 @@
 <template>
-  <form class="generate-image-form">
+  <form class="generate-image-form" @submit.prevent="generateImage">
     <input
       type="text"
       placeholder="digital Illustration of a bowl of soup that is also a portal to another dimension"
       class="generate-image-form__text-prompt"
+      v-model="optionSelected.textPrompt"
     />
+    <ul class="ai-options">
+      <li>
+        <input
+          type="radio"
+          value="DeepAI"
+          name="generationOptions"
+          id="deep-ai"
+          v-model="optionSelected.aiType"
+        />
+        <label for="deep-ai" class="btn">DeepAI</label>
+      </li>
+      <li>
+        <input
+          type="radio"
+          value="OpenAI"
+          name="generationOptions"
+          id="open-ai"
+          v-model="optionSelected.aiType"
+        />
+        <label for="open-ai" class="btn">OpenAI</label>
+      </li>
+      <li>
+        <input
+          type="radio"
+          value="Compare Both"
+          name="generationOptions"
+          id="compare-both"
+          v-model="optionSelected.aiType"
+        />
+        <label for="compare-both" class="btn">Compare Both</label>
+      </li>
+      <button type="submit" class="btn btn--submit">Generate Images</button>
+    </ul>
   </form>
 </template>
 
-<script setup></script>
+<script setup>
+import { reactive } from "vue"
+
+const emit = defineEmits(["generateImageEvent"])
+
+const optionSelected = reactive({
+  aiType: null,
+  textPrompt: null,
+})
+
+function generateImage() {
+  emit("generateImageEvent", optionSelected)
+}
+</script>
 
 <style lang="scss" scoped>
 .generate-image-form {
@@ -28,5 +75,84 @@
   color: #2d2487;
   font-style: italic;
   text-align: center;
+}
+
+.ai-options {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 1rem;
+  justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 1.5rem;
+    justify-content: center;
+    grid-gap: 0.5rem;
+  }
+
+  @media screen and (max-width: 425px) {
+    flex-direction: column;
+  }
+}
+
+.ai-options li {
+  list-style-type: none;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
+  border: 3px solid #2d2487;
+  transition: 0.3s ease all;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 200px;
+  text-align: center;
+  font-size: 1rem;
+
+  @media screen and (max-width: 900px) {
+    min-width: 150px;
+  }
+
+  @media screen and (max-width: 768px) {
+    min-width: 100px;
+    font-size: 0.875rem;
+  }
+
+  @media screen and (max-width: 425px) {
+    width: 100%;
+  }
+}
+
+input[type="radio"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+}
+
+input[type="radio"]:focus + label,
+.btn:hover,
+input[type="radio"]:checked + label {
+  background: white;
+  border-color: white;
+  color: #000000;
+}
+
+.btn--submit {
+  background: white;
+  color: #000;
+  border-color: white;
+}
+
+.btn--submit:hover {
+  border-color: #2d2487;
+  background: transparent;
+  color: white;
 }
 </style>

@@ -4,20 +4,38 @@
       <p class="instructions">
         Please enter a description of the image you want to generate.
       </p>
-      <GenerateImageForm />
+      <GenerateImageForm @generate-image-event="getGenerateImageEvent" />
+      <p v-if="loading">Loading...</p>
       <div class="result">
-        <img :src="image.placeholder ? image.url : image.url" />
+        <img v-if="!loading" :src="image.url" />
       </div>
     </div>
   </main>
 </template>
 
 <script setup>
+import { textToImage } from "../helpers/apiCalls"
+import { reactive, ref } from "vue"
 import GenerateImageForm from "../components/GenerateImageForm.vue"
 
-const image = {
+//state
+const image = reactive({
   url: "https://via.placeholder.com/900x900",
   placeholder: true,
+})
+
+const loading = ref(false)
+
+function getGenerateImageEvent(options) {
+  // const aiType = options.aiType
+  const textPrompt = options.textPrompt
+
+  loading.value = !loading.value
+
+  textToImage(textPrompt).then((result) => {
+    image.url = result
+    loading.value = !loading.value
+  })
 }
 </script>
 
