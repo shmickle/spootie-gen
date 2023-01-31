@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <img
-      src="../assets/images/spootie-gen-logo.png"
+      src="@/assets/images/spootie-gen-logo.png"
       width="259"
       height="27"
       alt="Spootie Gen Logo"
@@ -13,7 +13,7 @@
 
 <style scoped>
 .header {
-  background-image: url("../assets/images/svg/spootie-gen-background.svg");
+  background-image: url("@/assets/images/svg/spootie-gen-background.svg");
   background-size: cover;
   background-position: center center;
   display: flex;

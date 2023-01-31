@@ -14,6 +14,7 @@
           name="generationOptions"
           id="deep-ai"
           v-model="optionSelected.aiType"
+          checked
         />
         <label for="deep-ai" class="btn">DeepAI</label>
       </li>

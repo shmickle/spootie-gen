@@ -4,9 +4,9 @@
       <p class="instructions">
         Please enter a description of the image you want to generate.
       </p>
-      <GenerateImageForm @generate-image-event="generateImageEvent" />
+      <FormGenerateImage @generate-image-event="generateImageEvent" />
       <div class="result">
-        <p class="loading" v-if="loading">Loading...</p>
+        <BaseLoadingRoller v-if="loading" />
         <div v-else>
           <p v-if="!image.placeholder">Text Prompt: "{{ textPrompt }}"</p>
           <img :src="image.url" />
@@ -19,7 +19,8 @@
 <script setup>
 import { textToImage } from "../helpers/apiCalls"
 import { reactive, ref } from "vue"
-import GenerateImageForm from "../components/GenerateImageForm.vue"
+import FormGenerateImage from "../components/FormGenerateImage.vue"
+import BaseLoadingRoller from "../components/utility/BaseLoadingRoller.vue"
 
 //state
 const image = reactive({
