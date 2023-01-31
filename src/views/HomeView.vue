@@ -6,11 +6,13 @@
       </p>
       <FormGenerateImage @generate-image-event="generateImageEvent" />
       <div class="result">
-        <BaseLoadingRoller v-if="loading" />
-        <div v-else>
-          <p v-if="!image.placeholder">Text Prompt: "{{ textPrompt }}"</p>
-          <img :src="image.url" />
-        </div>
+        <Transition name="slide-fade" mode="out-in">
+          <BaseLoadingRoller v-if="loading" />
+          <div v-else>
+            <p v-if="!image.placeholder">Text Prompt: "{{ textPrompt }}"</p>
+            <img :src="image.url" />
+          </div>
+        </Transition>
       </div>
     </div>
   </main>
@@ -64,5 +66,19 @@ p {
 
 img {
   border-radius: 10px;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
 }
 </style>

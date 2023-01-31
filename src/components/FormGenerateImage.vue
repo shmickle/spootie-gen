@@ -5,6 +5,7 @@
       placeholder="digital Illustration of a bowl of soup that is also a portal to another dimension"
       class="generate-image-form__text-prompt"
       v-model="optionSelected.textPrompt"
+      required
     />
     <ul class="ai-options">
       <li>
@@ -56,6 +57,8 @@ const optionSelected = reactive({
 function generateImage(event) {
   event.target.reset()
   emit("generateImageEvent", optionSelected)
+  optionSelected.aiType = null
+  optionSelected.textPrompt = null
 }
 </script>
 
@@ -71,12 +74,17 @@ function generateImage(event) {
   padding: 1rem 1rem;
   border-radius: 10px;
   box-shadow: 6px 7px 0px #2a1f83;
+  transition: 0.3s ease all;
 }
 
 .generate-image-form__text-prompt::placeholder {
   color: #2d2487;
   font-style: italic;
   text-align: center;
+}
+
+.generate-image-form__text-prompt:focus {
+  box-shadow: none;
 }
 
 .ai-options {
