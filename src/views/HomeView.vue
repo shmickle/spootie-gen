@@ -10,7 +10,7 @@
           <BaseLoadingRoller v-if="loading" />
           <div v-else>
             <p v-if="!image.placeholder">Text Prompt: "{{ textPrompt }}"</p>
-            <img :src="image.url" />
+            <img v-if="image.url" :src="image.url" />
           </div>
         </Transition>
       </div>
@@ -26,7 +26,7 @@ import BaseLoadingRoller from "../components/utility/BaseLoadingRoller.vue"
 
 //state
 const image = reactive({
-  url: "https://via.placeholder.com/900x900",
+  url: "",
   placeholder: true,
 })
 
