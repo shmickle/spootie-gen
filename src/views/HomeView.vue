@@ -23,7 +23,8 @@ import AiGenerationResult from "../components/AiGenerationResult.vue"
 
 //state
 const image = reactive({
-  url: "",
+  deepAiURL: "",
+  openAiURL: "",
   placeholder: true,
 })
 
@@ -38,8 +39,23 @@ function generateImageEvent(options) {
   loading.value = !loading.value
   image.placeholder = true
 
+  image.deepAiURL = ""
+  image.openAiURL = ""
+
   textToImage(textPrompt.value).then((result) => {
-    image.url = result
+    switch (aiType.value) {
+      case "DeepAI":
+        image.deepAiURL = result
+        break
+      case "OpenAI":
+        image.openAiURL = result
+        break
+      case "Compare Both":
+        image.deepAiURL = result
+        image.openAiURL = result
+        break
+    }
+
     image.placeholder = false
     loading.value = !loading.value
   })

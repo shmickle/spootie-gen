@@ -3,14 +3,25 @@
     <Transition name="slide-fade" mode="out-in">
       <BaseLoadingRoller v-if="props.loading" />
       <div v-else>
-        <p v-if="!props.image.placeholder">
+        <h2 v-if="!props.image.placeholder">
           Text Prompt: "{{ props.textPrompt }}"
-        </p>
-        <img
-          v-if="props.image.url"
-          :src="props.image.url"
-          :alt="`Image generated from prompt: ${props.textPrompt}`"
-        />
+        </h2>
+        <div class="image-result-wrapper">
+          <div v-if="props.image.deepAiURL" class="image-wrapper">
+            <h3>DeepAI Result</h3>
+            <img
+              :src="props.image.deepAiURL"
+              :alt="`DeepAI Image generated from prompt: ${props.textPrompt}`"
+            />
+          </div>
+          <div v-if="props.image.openAiURL" class="image-wrapper">
+            <h3>OpenAI Result</h3>
+            <img
+              :src="props.image.openAiURL"
+              :alt="`OpenAI Image generated from prompt: ${props.textPrompt}`"
+            />
+          </div>
+        </div>
       </div>
     </Transition>
   </div>
@@ -41,11 +52,13 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-p {
+h2,
+h3 {
   color: white;
 }
+
 .result {
-  margin: 5rem 0 0;
+  margin: 2rem 0 0;
   text-align: center;
 }
 
@@ -65,5 +78,12 @@ img {
 .slide-fade-leave-to {
   transform: translateX(20px);
   opacity: 0;
+}
+
+.image-result-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 2rem;
+  justify-content: center;
 }
 </style>
