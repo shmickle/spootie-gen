@@ -132,6 +132,11 @@ function generateImage() {
   @media screen and (max-width: 425px) {
     width: 100%;
   }
+
+  &:hover {
+    background: #2d2487;
+    color: white;
+  }
 }
 
 input[type="radio"] {
@@ -145,11 +150,9 @@ input[type="radio"] {
 }
 
 input[type="radio"]:focus + label,
-.btn:hover,
 input[type="radio"]:checked + label {
-  background: white;
-  border-color: white;
-  color: #000000;
+  background: #2d2487;
+  color: white;
 }
 
 .btn--submit {
@@ -160,7 +163,7 @@ input[type="radio"]:checked + label {
 
 .btn--submit:hover {
   border-color: #2d2487;
-  background: transparent;
+  background: #2d2487;
   color: white;
 }
 </style>

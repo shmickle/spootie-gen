@@ -6,7 +6,11 @@
         <p v-if="!props.image.placeholder">
           Text Prompt: "{{ props.textPrompt }}"
         </p>
-        <img v-if="props.image.url" :src="props.image.url" />
+        <img
+          v-if="props.image.url"
+          :src="props.image.url"
+          :alt="`Image generated from prompt: ${props.textPrompt}`"
+        />
       </div>
     </Transition>
   </div>
