@@ -5,7 +5,7 @@
         Please enter a description of the image you want to generate.
       </p>
       <FormGenerateImage @generate-image-event="generateImageEvent" />
-      <ImageGenerationResult
+      <AiGenerationResult
         :text-prompt="textPrompt"
         :ai-type="aiType"
         :loading="loading"
@@ -19,7 +19,7 @@
 import { ref, reactive } from "vue"
 import { textToImage } from "../helpers/apiCalls"
 import FormGenerateImage from "../components/FormGenerateImage.vue"
-import ImageGenerationResult from "../components/ImageGenerationResult.vue"
+import AiGenerationResult from "../components/AiGenerationResult.vue"
 
 //state
 const image = reactive({
