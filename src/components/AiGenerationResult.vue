@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import BaseLoadingRoller from "../components/utility/BaseLoadingRoller.vue"
+import BaseLoadingRoller from "./utility/BaseLoadingRoller.vue"
 
 //props
 const props = defineProps({
