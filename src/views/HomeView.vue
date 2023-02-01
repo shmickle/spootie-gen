@@ -5,24 +5,21 @@
         Please enter a description of the image you want to generate.
       </p>
       <FormGenerateImage @generate-image-event="generateImageEvent" />
-      <div class="result">
-        <Transition name="slide-fade" mode="out-in">
-          <BaseLoadingRoller v-if="loading" />
-          <div v-else>
-            <p v-if="!image.placeholder">Text Prompt: "{{ textPrompt }}"</p>
-            <img v-if="image.url" :src="image.url" />
-          </div>
-        </Transition>
-      </div>
+      <ImageGenerationResult
+        :text-prompt="textPrompt"
+        :ai-type="aiType"
+        :loading="loading"
+        :image="image"
+      />
     </div>
   </main>
 </template>
 
 <script setup>
+import { ref, reactive } from "vue"
 import { textToImage } from "../helpers/apiCalls"
-import { reactive, ref } from "vue"
 import FormGenerateImage from "../components/FormGenerateImage.vue"
-import BaseLoadingRoller from "../components/utility/BaseLoadingRoller.vue"
+import ImageGenerationResult from "../components/ImageGenerationResult.vue"
 
 //state
 const image = reactive({
@@ -30,14 +27,14 @@ const image = reactive({
   placeholder: true,
 })
 
+const textPrompt = ref("")
+const aiType = ref("")
+
 const loading = ref(false)
 
-let textPrompt = ref(null)
-
 function generateImageEvent(options) {
-  // const aiType = options.aiType
+  aiType.value = options.aiType
   textPrompt.value = options.textPrompt
-
   loading.value = !loading.value
   image.placeholder = true
 
@@ -54,31 +51,7 @@ p {
   color: white;
 }
 
-.instructions,
-.loading {
+.instructions {
   text-align: center;
-}
-
-.result {
-  margin: 5rem 0 0;
-  text-align: center;
-}
-
-img {
-  border-radius: 10px;
-}
-
-.slide-fade-enter-active {
-  transition: all 0.3s ease;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
 }
 </style>
