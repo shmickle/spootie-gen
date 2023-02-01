@@ -29,9 +29,9 @@ const image = reactive({
 
 const textPrompt = ref("")
 const aiType = ref("")
-
 const loading = ref(false)
 
+//methods
 function generateImageEvent(options) {
   aiType.value = options.aiType
   textPrompt.value = options.textPrompt

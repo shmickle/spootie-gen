@@ -47,13 +47,16 @@
 <script setup>
 import { reactive } from "vue"
 
+//emits
 const emit = defineEmits(["generateImageEvent"])
 
+//state
 const optionSelected = reactive({
   aiType: "",
   textPrompt: "",
 })
 
+//methods
 function generateImage() {
   emit("generateImageEvent", optionSelected)
   optionSelected.textPrompt = ""
