@@ -52,7 +52,7 @@ const emit = defineEmits(["generateImageEvent"])
 
 //state
 const optionSelected = reactive({
-  aiType: "",
+  aiType: "DeepAI",
   textPrompt: "",
 })
 
