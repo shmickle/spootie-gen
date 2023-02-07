@@ -1,13 +1,16 @@
-import apiKey from "../apiKey"
-import deepai from "deepai"
+import axios from "axios"
 
-deepai.setApiKey(apiKey)
+const apiClient = axios.create({
+  baseURL: `https://spootie-gen-backend.onrender.com/`,
+  withCredentials: false,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+})
 
-export async function textToImage(text, gridSize) {
-  const resp = await deepai.callStandardApi("text2img", {
-    text: text,
-    grid_size: gridSize || "1",
+export async function textToImage(textPrompt) {
+  return apiClient.get(`/text2img/${textPrompt}`).catch(function (error) {
+    console.log(error)
   })
-
-  return resp.output_url
 }

@@ -33,7 +33,7 @@ const aiType = ref("")
 const loading = ref(false)
 
 //methods
-function generateImageEvent(options) {
+async function generateImageEvent(options) {
   aiType.value = options.aiType
   textPrompt.value = options.textPrompt
   loading.value = !loading.value
@@ -42,17 +42,18 @@ function generateImageEvent(options) {
   image.deepAiURL = ""
   image.openAiURL = ""
 
-  textToImage(textPrompt.value).then((result) => {
+  textToImage(textPrompt.value).then((response) => {
+    const imageResult = response.data.output_url
     switch (aiType.value) {
       case "DeepAI":
-        image.deepAiURL = result
+        image.deepAiURL = imageResult
         break
       case "OpenAI":
-        image.openAiURL = result
+        image.openAiURL = imageResult
         break
       case "Compare Both":
-        image.deepAiURL = result
-        image.openAiURL = result
+        image.deepAiURL = imageResult
+        image.openAiURL = imageResult
         break
     }
 
