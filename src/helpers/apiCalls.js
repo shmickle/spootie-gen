@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const apiClient = axios.create({
-  baseURL: `https://spootie-gen-backend.onrender.com/`,
+  baseURL: `https://spootie-gen-api.ericmbryant.com/`,
   withCredentials: false,
   headers: {
     Accept: "application/json",
