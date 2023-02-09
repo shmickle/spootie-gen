@@ -4,7 +4,10 @@
       <p class="instructions">
         Please enter a description of the image you want to generate.
       </p>
-      <FormGenerateImage @generate-image-event="generateImageEvent" />
+      <FormGenerateImage
+        @generate-image-event="generateImageEvent"
+        :loading="loading"
+      />
       <AiGenerationResult
         :text-prompt="textPrompt"
         :ai-type="aiType"

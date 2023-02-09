@@ -39,13 +39,22 @@
         />
         <label for="compare-both" class="btn">Compare Both</label>
       </li>
-      <button type="submit" class="btn btn--submit">Generate Images</button>
+      <button type="submit" class="btn btn--submit" :disabled="props.loading">
+        Generate Images
+      </button>
     </ul>
   </form>
 </template>
 
 <script setup>
 import { reactive } from "vue"
+
+const props = defineProps({
+  loading: {
+    type: Boolean,
+    required: true,
+  },
+})
 
 //emits
 const emit = defineEmits(["generateImageEvent"])
@@ -168,5 +177,10 @@ input[type="radio"]:checked + label {
   border-color: #2d2487;
   background: #2d2487;
   color: white;
+}
+
+.btn--submit:disabled {
+  opacity: 0.3;
+  pointer-events: none;
 }
 </style>
