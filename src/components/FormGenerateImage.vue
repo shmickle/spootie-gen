@@ -2,13 +2,12 @@
   <form class="generate-image-form" @submit.prevent="generateImage">
     <input
       type="text"
-      placeholder="digital Illustration of a bowl of soup that is also a portal to another dimension"
       class="generate-image-form__text-prompt"
       v-model="optionSelected.textPrompt"
       required
     />
     <ul class="ai-options">
-      <li>
+      <!-- <li>
         <input
           type="radio"
           value="DeepAI"
@@ -38,7 +37,7 @@
           v-model="optionSelected.aiType"
         />
         <label for="compare-both" class="btn">Compare Both</label>
-      </li>
+      </li> -->
       <button type="submit" class="btn btn--submit" :disabled="props.loading">
         Generate Images
       </button>
@@ -168,14 +167,15 @@ input[type="radio"]:checked + label {
 }
 
 .btn--submit {
-  background: white;
-  color: #000;
-  border-color: white;
+  background: #2d2487;
+  color: #ff;
+  border-color: #2d2487;
+  width: 100%;
 }
 
 .btn--submit:hover {
   border-color: #2d2487;
-  background: #2d2487;
+  background: transparent;
   color: white;
 }
 
